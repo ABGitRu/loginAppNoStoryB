@@ -48,6 +48,8 @@ class LoginViewController: UIViewController {
          return button
     }()
     
+    var users = [Person(login: "Alex", password: "1234")]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.3141447008, green: 0.681245327, blue: 0.1670588255, alpha: 1)
@@ -59,10 +61,18 @@ class LoginViewController: UIViewController {
     }
     
     @objc private func loginTapped() {
-        let helloVC = HelloViewController()
+        guard let login = loginTF.text,
+              let password = passwordTF.text else { return }
         
-        helloVC.modalPresentationStyle = .fullScreen
-        showDetailViewController(helloVC, sender: nil)
+        for user in users {
+            if login == user.login && password == user.password {
+                let helloVC = HelloViewController()
+                helloVC.loginName = login
+                helloVC.modalPresentationStyle = .fullScreen
+                showDetailViewController(helloVC, sender: nil)
+            }
+        }
+        
     }
     
     @objc private func regButtonTapped() {
@@ -73,8 +83,10 @@ class LoginViewController: UIViewController {
         ac.addTextField { passTF in
             passTF.placeholder = "Enter password"
         }
-        let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
-            
+        let saveAction = UIAlertAction(title: "Save", style: .default) {[unowned self] _ in
+            guard let login = ac.textFields?.first?.text,
+                  let password = ac.textFields?.last?.text else { return }
+            self.users.append(Person(login: login, password: password))
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
         ac.addAction(saveAction)
