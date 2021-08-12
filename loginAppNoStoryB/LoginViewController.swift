@@ -8,7 +8,7 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-    
+// MARK: - USER INTERFACE
     let loginTF: UITextField = {
         let textfield = UITextField()
         textfield.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +59,7 @@ class LoginViewController: UIViewController {
         view.addSubview(registerButton)
         setupConstraints()
     }
-    
+// MARK: PRIVATE OBJC METHODS
     @objc private func loginTapped() {
         guard let login = loginTF.text,
               let password = passwordTF.text else { return }
@@ -93,7 +93,7 @@ class LoginViewController: UIViewController {
         ac.addAction(cancelAction)
         present(ac, animated: true, completion: nil)
     }
-    
+// MARK: PRIVATE UI METHODS
     private func setupConstraints() {
         let constraints = [
             loginTF.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
