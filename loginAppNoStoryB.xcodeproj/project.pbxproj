@@ -14,6 +14,7 @@
 		04A144D626C2D25E0039B34F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A144D426C2D25E0039B34F /* LaunchScreen.storyboard */; };
 		04A144DE26C421410039B34F /* HelloViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A144DD26C421410039B34F /* HelloViewController.swift */; };
 		04A144E026C510640039B34F /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A144DF26C510640039B34F /* Person.swift */; };
+		04A144E226C518800039B34F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A144E126C518800039B34F /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		04A144D726C2D25E0039B34F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04A144DD26C421410039B34F /* HelloViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloViewController.swift; sourceTree = "<group>"; };
 		04A144DF26C510640039B34F /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
+		04A144E126C518800039B34F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +60,49 @@
 		04A144C826C2D2580039B34F /* loginAppNoStoryB */ = {
 			isa = PBXGroup;
 			children = (
-				04A144C926C2D2580039B34F /* AppDelegate.swift */,
-				04A144CB26C2D2580039B34F /* SceneDelegate.swift */,
-				04A144CD26C2D2580039B34F /* LoginViewController.swift */,
-				04A144DF26C510640039B34F /* Person.swift */,
-				04A144DD26C421410039B34F /* HelloViewController.swift */,
+				04A144E626C518B40039B34F /* Supporting */,
+				04A144E326C518920039B34F /* Login */,
+				04A144E526C518AA0039B34F /* Hello */,
+				04A144E426C5189E0039B34F /* Model */,
 				04A144D226C2D25E0039B34F /* Assets.xcassets */,
 				04A144D426C2D25E0039B34F /* LaunchScreen.storyboard */,
-				04A144D726C2D25E0039B34F /* Info.plist */,
 			);
 			path = loginAppNoStoryB;
+			sourceTree = "<group>";
+		};
+		04A144E326C518920039B34F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				04A144CD26C2D2580039B34F /* LoginViewController.swift */,
+				04A144E126C518800039B34F /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		04A144E426C5189E0039B34F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04A144DF26C510640039B34F /* Person.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		04A144E526C518AA0039B34F /* Hello */ = {
+			isa = PBXGroup;
+			children = (
+				04A144DD26C421410039B34F /* HelloViewController.swift */,
+			);
+			path = Hello;
+			sourceTree = "<group>";
+		};
+		04A144E626C518B40039B34F /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				04A144C926C2D2580039B34F /* AppDelegate.swift */,
+				04A144CB26C2D2580039B34F /* SceneDelegate.swift */,
+				04A144D726C2D25E0039B34F /* Info.plist */,
+			);
+			path = Supporting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +176,7 @@
 			files = (
 				04A144E026C510640039B34F /* Person.swift in Sources */,
 				04A144CE26C2D2580039B34F /* LoginViewController.swift in Sources */,
+				04A144E226C518800039B34F /* LoginViewModel.swift in Sources */,
 				04A144CA26C2D2580039B34F /* AppDelegate.swift in Sources */,
 				04A144CC26C2D2580039B34F /* SceneDelegate.swift in Sources */,
 				04A144DE26C421410039B34F /* HelloViewController.swift in Sources */,
@@ -284,7 +320,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JCX8Z993GT;
-				INFOPLIST_FILE = loginAppNoStoryB/Info.plist;
+				INFOPLIST_FILE = loginAppNoStoryB/Supporting/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -303,7 +339,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JCX8Z993GT;
-				INFOPLIST_FILE = loginAppNoStoryB/Info.plist;
+				INFOPLIST_FILE = loginAppNoStoryB/Supporting/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

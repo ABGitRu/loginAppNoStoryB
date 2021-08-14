@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol LoginViewProtocol {
+    func showDetail(vc: UIViewController)
+    func presentAC(ac: UIViewController)
+}
+
 class LoginViewController: UIViewController {
 // MARK: - USER INTERFACE
     let loginTF: UITextField = {
@@ -23,6 +28,7 @@ class LoginViewController: UIViewController {
         textfield.placeholder = "Enter your password"
         textfield.borderStyle = .roundedRect
         textfield.backgroundColor = #colorLiteral(red: 0.5413205028, green: 0.7682641745, blue: 0.2105300128, alpha: 1)
+        textfield.isSecureTextEntry = true
         return textfield
     }()
     
@@ -36,7 +42,6 @@ class LoginViewController: UIViewController {
         button.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
         return button
     }()
-    
     let registerButton: UIButton = {
         let button = UIButton(type: .system)
          button.translatesAutoresizingMaskIntoConstraints = false
@@ -48,10 +53,31 @@ class LoginViewController: UIViewController {
          return button
     }()
     
-    var users = [Person(login: "Alex", password: "1234")]
+// MARK: - loginViewModel
+    lazy var loginViewModel = LoginViewModel()
     
+// MARK: - OVERRIDE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+        loginViewModel.delegate = self
+    }
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        setupConstraints()
+    }
+    
+// MARK: PRIVATE ACTION METHODS
+    @objc private func loginTapped() {
+        loginViewModel.loginUserTapped(loginTF: loginTF, passwordTF: passwordTF)
+    }
+    
+    @objc private func regButtonTapped() {
+        loginViewModel.regUserTapped()
+    }
+    
+// MARK: PRIVATE UI METHODS
+    private func setupViews() {
         view.backgroundColor = #colorLiteral(red: 0.3141447008, green: 0.681245327, blue: 0.1670588255, alpha: 1)
         view.addSubview(loginTF)
         view.addSubview(passwordTF)
@@ -59,41 +85,7 @@ class LoginViewController: UIViewController {
         view.addSubview(registerButton)
         setupConstraints()
     }
-// MARK: PRIVATE OBJC METHODS
-    @objc private func loginTapped() {
-        guard let login = loginTF.text,
-              let password = passwordTF.text else { return }
-        
-        for user in users {
-            if login == user.login && password == user.password {
-                let helloVC = HelloViewController()
-                helloVC.loginName = login
-                helloVC.modalPresentationStyle = .fullScreen
-                showDetailViewController(helloVC, sender: nil)
-            }
-        }
-        
-    }
     
-    @objc private func regButtonTapped() {
-        let ac = UIAlertController(title: "Register new user", message: "Enter login & password", preferredStyle: .alert)
-        ac.addTextField { loginTF in
-            loginTF.placeholder = "Enter login"
-        }
-        ac.addTextField { passTF in
-            passTF.placeholder = "Enter password"
-        }
-        let saveAction = UIAlertAction(title: "Save", style: .default) {[unowned self] _ in
-            guard let login = ac.textFields?.first?.text,
-                  let password = ac.textFields?.last?.text else { return }
-            self.users.append(Person(login: login, password: password))
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
-        ac.addAction(saveAction)
-        ac.addAction(cancelAction)
-        present(ac, animated: true, completion: nil)
-    }
-// MARK: PRIVATE UI METHODS
     private func setupConstraints() {
         let constraints = [
             loginTF.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100),
@@ -119,6 +111,15 @@ class LoginViewController: UIViewController {
         
         NSLayoutConstraint.activate(constraints)
     }
-    
 }
 
+// MARK: EXTENSION LoginViewProtocol
+extension LoginViewController: LoginViewProtocol {
+    func showDetail(vc: UIViewController) {
+        present(vc, animated: true, completion: nil)
+    }
+    func presentAC(ac: UIViewController) {
+        present(ac, animated: true, completion: nil)
+    }
+    
+}
